@@ -26,11 +26,16 @@ async def postImg(file: UploadFile = File(...)):
         return {"message": "No file sent"}
     else:
         try:
-            with open(file.filename, 'rb') as i:
-                with open(file.filename, 'wb') as o:
+            output=''
+            with open('image.jpg','wb') as image:
+                image.write(file)
+                image.close()
+            with open('image.jpg', 'rb') as i:
+                with open(output_path, 'wb') as o:
                     input = i.read()
                     output = remove(input)
                     o.write(output)
+            return {"file_output": output}
         except Exception:
             return {"message": "There was an error uploading the file"}
         finally:
