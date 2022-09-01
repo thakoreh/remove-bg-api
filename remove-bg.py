@@ -25,15 +25,14 @@ async def postImg(file: UploadFile = File(...)):
         return {"message": "No file sent"}
     else:
         try:
-            contents = file.file.read()
-            # with open(file, 'rb') as i:
-            with open(output_path, 'wb') as o:
-                # input =contents.read()
-                output = remove(contents)
-                o.write(output)
+            with open(file.filename, 'rb') as i:
+                with open(file.filename, 'wb') as o:
+                    input = i.read()
+                    output = remove(input)
+                    o.write(output)
         except Exception:
             return {"message": "There was an error uploading the file"}
         finally:
-            file.file.close()
+            return {"message": "There was an error uploading the file"}
 
 # api_endpoint = "https://remove-bg-api.herokuapp.com/"
