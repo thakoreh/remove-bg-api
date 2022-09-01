@@ -1,4 +1,4 @@
-from fastapi import FastAPI,Response
+from fastapi import FastAPI,Response,UploadFile
 import requests
 from fastapi.responses import FileResponse
 from rembg import remove
@@ -20,8 +20,8 @@ def home():
     return "Welcome to Home Page"
 
 @app.post('/upload')
-def postImg():
-    with open(data, 'rb') as i:
+async def postImg(file:UploadFile):
+    with open(file.filename, 'rb') as i:
         with open(output_path, 'wb') as o:
             input = i.read()
             output = remove(input)
