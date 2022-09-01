@@ -21,6 +21,7 @@ def home():
 
 @app.post('/upload')
 async def postImg(file: UploadFile = File(...)):
+    print(file)
     if not file:
         return {"message": "No file sent"}
     else:
